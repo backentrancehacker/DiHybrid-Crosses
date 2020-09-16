@@ -1,4 +1,4 @@
-// Not ideal
+// Not the best solution
 
 let mother = ['Rr', 'Tt']
 let father = ['Rr', 'Tt']
