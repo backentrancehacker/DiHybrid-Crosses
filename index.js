@@ -1,7 +1,16 @@
-// Not the best solution
+let alleles  = {
+	'RR': 'round',
+	'Rr': 'round',
+	'rr': 'wrinkled',
+	'TT': 'tall',
+	'Tt': 'tall',
+	'tt': 'short'
+}
 
 let mother = ['Rr', 'Tt']
 let father = ['Rr', 'Tt']
+
+const reverse = str => str.split('').reverse().join('')
 
 const split = (parent, arr=[], swapped) => {
 	let allele1 = parent[0]
@@ -10,7 +19,7 @@ const split = (parent, arr=[], swapped) => {
 		arr.push(allele1[i] + allele2[i])
 	}
 	if(!swapped) {
-		parent[0] = parent[0].split('').reverse().join('')
+		parent[0] = reverse(parent[0])
 		split(parent, arr, true)
 	}
 	return arr
@@ -36,14 +45,34 @@ const pretty = arr => {
 	return alt
 }
 
+const test = arr => {
+	let responses = {}
+	for(let res of arr) {
+		let type = []
+		for(const [key, value] of Object.entries(alleles)) {
+			if(res.includes(key) || res.includes(reverse(key))) {
+				type.push(alleles[key])
+			}
+		}
+		let key = type.join('/')
+		if(responses.hasOwnProperty(key)) {
+			responses[key] = responses[key] + 1
+		}
+		else {
+			responses[key] = 1
+		}
+	}
+	return responses
+}
+
 const processor = () => {
 	let mA = split(mother)
 	let fA = split(father)
 	
 	let res = pretty(combine(mA, fA))
-	console.log(res)
-	console.log(res.length)
+	console.log(test(res))
 }
+
 
 processor()
 
