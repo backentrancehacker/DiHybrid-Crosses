@@ -26,7 +26,7 @@ const combine = (mA, fA) => {
 	return arr
 }
 
-const destructure = arr => {
+const pretty = arr => {
 	let alt = []
 	for(let part of arr) {
 		let f = part[1]
@@ -40,10 +40,23 @@ const processor = () => {
 	let mA = split(mother)
 	let fA = split(father)
 	
-	console.log(destructure(combine(mA, fA)))
+	let res = pretty(combine(mA, fA))
+	console.log(res)
+	console.log(res.length)
 }
 
 processor()
 
-// ['R', 'r', 'T', 't']
+/*
+RrTt | RrTt
+(RT + Rt + rT + rt) * (RT + Rt + rT + rt) = 
+RTRT + RTRt + RTrT + RTrt + 
+RtRT + RtRt + RtrT + Rtrt + 
+rTRT + rTRt + rTrT + rTrt +
+rtRT + rtRt + rtrT + rtrt = 
 
+RRTT + RRTt + RrTT + RrTt +
+RRTt + RRtt + RrTt + Rrtt + 
+RrTT + RrTt + rrTT + rrTt +
+RrTt + Rrtt + rrTt + rrtt
+*/
